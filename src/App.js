@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Landing from "./Landing";
 import PlantLookup from "./PlantLookup";
-import GardenSimulator from "./GardenSimulator";
+import GardenSimulator from "./gardenSimulator/GardenSimulator";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -22,18 +22,9 @@ const App = () => {
 		<>
 			<div style={{ minHeight: "85vh" }}>
 				<Switch>
-					<Route path="/plant-lookup">
-						<PlantLookup></PlantLookup>
-					</Route>
-					<Route path="/garden-simulator">
-						<GardenSimulator></GardenSimulator>
-					</Route>
-					<Route path="/team-simulator">
-						<GardenSimulator></GardenSimulator>
-					</Route>
-					<Route path="/">
-						<Landing></Landing>
-					</Route>
+					<Route exact path="/" component={Landing}></Route>
+					<Route path="/plant-lookup" component={PlantLookup}></Route>
+					<Route path="/garden-simulator" component={GardenSimulator}></Route>
 				</Switch>
 			</div>
 			<div className="text-warning">

@@ -12,7 +12,7 @@ const MAMA = {
 	hour: "144",
 	img: "mama",
 	plantID: "mama",
-	type: "mama"
+	type: "Mama"
 };
 const convertID = (plant) => {
 	let arrayID = plant.toString().split("");
