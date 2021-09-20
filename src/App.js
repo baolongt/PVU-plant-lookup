@@ -1,11 +1,9 @@
-import Input from "./Input";
-import { Provider } from "react-redux";
-import store from "./store";
-import Output from "./Output";
-import Explain from "./Explain";
+import React, { useEffect, useState } from "react";
+import { Switch, Route } from "react-router-dom";
+import Landing from "./Landing";
+import PlantLookup from "./PlantLookup";
+import GardenSimulator from "./GardenSimulator";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
-import Example from "./Example";
 
 const App = () => {
 	let [counter, setCounter] = useState(0);
@@ -22,33 +20,30 @@ const App = () => {
 
 	return (
 		<>
-			<p style={{ color: "#EEEEEE" }} className="h1 text-center">
-				Plant Lookup
-			</p>
-			<div className="shadow p-3 mb-5 bg-body rounded col-12 col-md-4 mx-auto">
-				<Provider store={store}>
-					<Input></Input>
-					<Output></Output>
-				</Provider>
+			<div style={{ minHeight: "85vh" }}>
+				<Switch>
+					<Route path="/plant-lookup">
+						<PlantLookup></PlantLookup>
+					</Route>
+					<Route path="/garden-simulator">
+						<GardenSimulator></GardenSimulator>
+					</Route>
+					<Route path="/team-simulator">
+						<GardenSimulator></GardenSimulator>
+					</Route>
+					<Route path="/">
+						<Landing></Landing>
+					</Route>
+				</Switch>
 			</div>
-			<Explain></Explain>
-			<Example></Example>
-
-			<div className="mt-3" style={{ color: "#FFD369" }}>
-				<p className="text-center">Thanks @Cherry3136 for formular</p>
+			<div className="text-warning">
+				<p className="text-center">Visit count: {counter}</p>
+				<p className="text-center">contact via telegram @long2401</p>
 				<p className="text-center">
-					Donate me: 0x4eAA5f182AcA60A9560b480FE737bc7bC9E33fcB (Binance Smart
+					Donate 0x4eAA5f182AcA60A9560b480FE737bc7bC9E33fcB (Binance Smart
 					Chain)
 				</p>
-				<p className="text-center">Visit count: {counter}</p>
 			</div>
-			<p className="d-none" align="left">
-				{" "}
-				<img
-					src="https://komarev.com/ghpvc/?username=baolongt&label=Profile%20views&color=0e75b6&style=flat"
-					alt="baolongt"
-				/>{" "}
-			</p>
 		</>
 	);
 };
