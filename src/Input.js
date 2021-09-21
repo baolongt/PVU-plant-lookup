@@ -16,7 +16,7 @@ const Input = () => {
 		}
 	};
 	return (
-		<div className="d-flex m-auto" style={{ backgroundColor: "#EEEEEE" }}>
+		<div className="d-flex m-auto" style={{ backgroundColor: "#EEEEEE", maxWidth: "550px" }}>
 			<input
 				className="form-control"
 				type="text"
@@ -24,7 +24,7 @@ const Input = () => {
 				placeholder="Plant id"
 				onChange={(e) => setPlantID(e.target.value.trim())}
 			/>
-			<button className="ms-1 btn btn-primary col-3" onClick={handleLookup}>
+			<button className="btn btn-primary col-3 rounded-0" onClick={handleLookup}>
 				Look up
 			</button>
 		</div>

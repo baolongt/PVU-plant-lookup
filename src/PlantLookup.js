@@ -28,28 +28,28 @@ const PlantLookup = () => {
 
 	return (
 		<>
-			<p style={{ color: "#EEEEEE" }} className="h1 text-center">
+			<p style={{ color: '#EEEEEE' }} className="h1 text-center m-3">
 				Plant Lookup
 			</p>
-			<div className="shadow p-3 mb-2 bg-body rounded col-12 col-md-6 mx-auto fs-6">
+			<div className="shadow p-3 mb-2 bg-dark rounded col-12 col-md-8 col-lg-6 mx-auto fs-6">
 				<Provider store={store}>
 					<Input></Input>
 					<Output price={price} fixFunc={toFixed}></Output>
 				</Provider>
 			</div>
-			<div className="text-light d-flex justify-content-center rate col-12 mx-lg-0">
-				<div className="p-2 me-2">
+			{/* <div className="text-light d-flex justify-content-center rate col-12 mx-lg-0">
+				<div className="p-2 me-2 bg-dark">
 					<p>PVU token</p>
 					<p>Price: {price}$</p>
 					<p>Updated {udpateTime}</p>
 				</div>
-				<div className="p-2">
+				<div className="p-2 bg-dark">
 					<p>Light Energy(LE) rate</p>
 					<p>1 PVU = 105 LE</p>
 					<p>150 LE = 1 PVU</p>
 					<p>(Not include 5% tax)</p>
 				</div>
-			</div>
+			</div> */}
 			{/* <div className="mt-3" style={{ color: "#FFD369" }}>
 				<p className="text-center">Don't sad if your plant is common one</p>
 				<p className="text-center">Anything that just costs money is cheap</p>
@@ -61,18 +61,18 @@ const PlantLookup = () => {
 					Chain)
 				</p>
 			</div> */}
-			<div className="mt-3" style={{ color: "#FFD369" }}>
+			<div className="mt-3" style={{ color: '#FFD369' }}>
 				{/* <p className="text-center">Visit count: {counter}</p> */}
 			</div>
 			<p className="d-none" align="left">
-				{" "}
+				{' '}
 				<img
 					src="https://komarev.com/ghpvc/?username=baolongt&label=Profile%20views&color=0e75b6&style=flat"
 					alt="baolongt"
-				/>{" "}
+				/>{' '}
 			</p>
 		</>
-	);
+	)
 };
 
 export default PlantLookup;

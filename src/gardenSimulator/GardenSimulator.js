@@ -87,22 +87,26 @@ const TeamCalculate = () => {
 	return (
 		<>
 			<h2 className="text-light text-center">Garden simulator</h2>
-			<div className="row">
-				<div className="col-12 col-md-3 p-2 mt-5">
-					<Input
-						addPlantFunc={handleAddPlant}
-						waterAllPlant={handleWaterPlant}
-						usePot={handleUsePot}
-						useScareCrow={handleUseScareCrow}
-						useGreenHouse={handleUseGreenHouse}
-					></Input>
-					<TotalBoard data={total} />
-					<button class="btn btn-danger col-6 mx-auto mt-2 ms-5">
+			<div className="row p-2">
+				<div className="col-12 p-2 mt-5">
+					<div class="col-12 d-flex flex-column flex-md-row justify-content-between">
+						<Input
+							addPlantFunc={handleAddPlant}
+							waterAllPlant={handleWaterPlant}
+							usePot={handleUsePot}
+							useScareCrow={handleUseScareCrow}
+							useGreenHouse={handleUseGreenHouse}
+						></Input>
+						<TotalBoard data={total} />
+					</div>
+          <div class="col-12 d-flex justify-content-center">
+					<button class="btn btn-danger mt-2">
 						Clear all
 					</button>
+          </div>
 				</div>
-				<div className="col-12 col-md-9 p-5">
-					<div className="d-flex row" style={{ minHeight: "160px" }}>
+				<div className="col-12 p-5">
+					<div className="d-flex row" style={{ minHeight: '160px' }}>
 						{team.map((plant, index) => {
 							return isNaN(plant.plantID) ? (
 								<Sunflower
@@ -118,13 +122,13 @@ const TeamCalculate = () => {
 									key={index}
 									removeFunc={handleRemovePlant}
 								/>
-							);
+							)
 						})}
 					</div>
 				</div>
 			</div>
 		</>
-	);
+	)
 };
 
 const Input = (props) => {
@@ -139,8 +143,8 @@ const Input = (props) => {
 		props.addPlantFunc(IDCalculate(id));
 	};
 	return (
-		<>
-			<div className="d-flex col-12 mt-3">
+		<div className="col-12 col-md-6 p-2">
+			<div className="d-flex col-12 col-lg-8 mt-3 mx-auto">
 				<input
 					className="form-control"
 					type="text"
@@ -155,53 +159,56 @@ const Input = (props) => {
 					Add
 				</button>
 			</div>
-			<div className="d-flex col-12 mt-2">
+			<div className="d-flex col-12 col-lg-8 mt-2 mx-auto">
 				<button
-					className="ms-1 btn btn-success btn-sm col-6"
-					onClick={() => handleAddSunflower("sapling")}
+					className="btn btn-success btn-sm col-6"
+					onClick={() => handleAddSunflower('sapling')}
 				>
 					Add sapling
 				</button>
 				<button
-					className="ms-1 btn btn-warning btn-sm col-6"
-					onClick={() => handleAddSunflower("mama")}
+					className="btn btn-warning btn-sm col-6"
+					onClick={() => handleAddSunflower('mama')}
 				>
 					Add mama
 				</button>
 			</div>
-			<div className="d-flex col-12 mt-2 flex-column">
-				<p className="text-center text-light">Tool assets</p>
-				<Tool
-					toolID="2"
-					name="water"
-					text="Water (50LE)"
-					type="input"
-					func={props.waterAllPlant}
-				/>
-				<Tool toolID="4" name="bigpot" text="Buy pot" func={props.usePot} />
-				<div
-					className="text-center text-light mb-1"
-					style={{ fontSize: "14px" }}
-				>
-					(Big pot for NFT and small pot for sunflower)
+			<div className="d-flex col-12 col-lg-8 mt-2 flex-column mx-auto">
+				<p className="col-12 text-center text-light">Tool assets</p>
+				<div className="col-12 d-flex flex-column flex-xl-row">
+					<div class="col-12 col-xl-6">
+						<Tool
+							toolID="2"
+							name="water"
+							text="Water (50LE)"
+							type="input"
+							func={props.waterAllPlant}
+						/>
+						<Tool toolID="4" name="bigpot" text="Buy pot" func={props.usePot} />
+						<div className="text-light mb-1" style={{ fontSize: '14px' }}>
+							(Big pot for NFT and small pot for sunflower)
+						</div>
+					</div>
+					<div className="col-12 col-xl-6">
+						<Tool
+							toolID="1"
+							name="scarecrow"
+							text="Scare crow (20LE)"
+							type="input"
+							func={props.useScareCrow}
+						/>
+						<Tool
+							toolID="5"
+							name="greenhouse"
+							text="Green house (10LE)"
+							type="input"
+							func={props.useGreenHouse}
+						/>
+					</div>
 				</div>
-				<Tool
-					toolID="1"
-					name="scarecrow"
-					text="Scare crow (20LE)"
-					type="input"
-					func={props.useScareCrow}
-				/>
-				<Tool
-					toolID="5"
-					name="greenhouse"
-					text="Green house (10LE)"
-					type="input"
-					func={props.useGreenHouse}
-				/>
 			</div>
-		</>
-	);
+		</div>
+	)
 };
 
 export default TeamCalculate;

@@ -88,62 +88,62 @@ const TotalBoard = (props) => {
 	let netIncome = netLEIncome / LEtoPVU;
 	return (
 		<div
-			style={{ minHeight: "100px" }}
-			className="col-12 ps-3 text-start flex-column d-flex text-light mt-3"
+			style={{ minHeight: '100px' }}
+			className="col-12 col-md-6 ps-3 text-start flex-column d-flex text-light mt-3 mx-auto"
 		>
-			<div className="col-12">
+			<div className="col-12 ms-2">
 				<p>
-					Total: {totalPlant - totalSapling - totalMama} NFT - {totalSapling}{" "}
+					Total: {totalPlant - totalSapling - totalMama} NFT - {totalSapling}{' '}
 					sapling, {totalMama} mama ({totalPlant})
 				</p>
 			</div>
-			<div className="col-12">
-				<div className="d-flex col-12">
+			<div className="col-12 ms-2">
+				<div className="d-flex col-10">
 					Total LE spend for sunflowers:
 					<span
 						className={`text-${
-							totalSpendForSunflower == 0 ? "light" : "danger"
+							totalSpendForSunflower == 0 ? 'light' : 'danger'
 						} ms-auto`}
 					>
 						{totalSpendForSunflower}
 					</span>
 				</div>
-				<div className="d-flex col-12">
-					Total LE spend for pots:{" "}
-					<span className={`text-${PotSum == 0 ? "light" : "danger"} ms-auto`}>
+				<div className="d-flex col-10">
+					Total LE spend for pots:{' '}
+					<span className={`text-${PotSum == 0 ? 'light' : 'danger'} ms-auto`}>
 						{PotSum}
 					</span>
 				</div>
-				<div className="d-flex col-12">
-					Total LE spend for other tools:{" "}
-					<span className={`text-${ToolSum == 0 ? "light" : "danger"} ms-auto`}>
+				<div className="d-flex col-10">
+					Total LE spend for other tools:{' '}
+					<span className={`text-${ToolSum == 0 ? 'light' : 'danger'} ms-auto`}>
 						{ToolSum}
 					</span>
 				</div>
 			</div>
-			<div className="col-12">
-				<div className="d-flex col-12">
+			<div className="col-12 ms-2">
+				<div className="d-flex col-10">
 					LE per hour:
-					<span className="ms-auto" style={{ color: "#20c997" }}>
+					<span className="ms-auto" style={{ color: '#20c997' }}>
 						{toFixed(totlaLEPerHour, 2)}
 					</span>
 				</div>
-				<div className="d-flex col-12">
+				<div className="d-flex col-10">
 					LE per day:
-					<span className="ms-auto" style={{ color: "#20c997" }}>
+					<span className="ms-auto" style={{ color: '#20c997' }}>
 						{toFixed(totlaLEPerHour * 24, 2)}
 					</span>
 				</div>
-				<div className="d-flex col-12">
+				<div className="d-flex col-10">
 					LE to PVU per day (5% fee):
-					<span className="ms-auto" style={{ color: "#20c997" }}>
+					<span className="ms-auto" style={{ color: '#20c997' }}>
 						{toFixed(totlaPVUPerHour * 24, 2)} PVU
 					</span>
 				</div>
 				<div>
-					<div className="d-flex col-12">
-						Total income:{" "}
-						<span className="ms-auto" style={{ color: "#20c997" }}>
+					<div className="d-flex col-10">
+						Total income:{' '}
+						<span className="ms-auto" style={{ color: '#20c997' }}>
 							{toFixed(totalPrice * 24, 2)}$
 						</span>
 					</div>
@@ -151,17 +151,19 @@ const TotalBoard = (props) => {
 						Income not inclued sunflowers and tools
 					</div>
 					<div>
-						1 PVU ={" "}
-						<span className="ms-auto" style={{ color: "#20c997" }}>
+						1 PVU ={' '}
+						<span className="ms-auto" style={{ color: '#20c997' }}>
 							{price}$
-						</span>{" "}
+						</span>{' '}
 						updated {udpateTime}
 					</div>
 				</div>
 			</div>
-			<div>Sorry for bad UI. Formula will update</div>
+			<div className="ms-2 mt-2">
+				<small>Sorry for bad UI. Formula will update</small>
+			</div>
 		</div>
-	);
+	)
 };
 
 export default TotalBoard;
