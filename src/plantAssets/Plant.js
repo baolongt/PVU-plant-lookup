@@ -11,23 +11,23 @@ const Plant = (props) => {
 				className="d-flex flex-column"
 			>
 				<div className="row">
-					<div className="col-5 col-md-7 col-xl-6 col-xxl-5 text-white mt-2 d-flex flex-column me-auto">
+					<div className="col-5 col-md-7 col-xl-8 text-white mt-2 d-flex flex-column me-auto">
 						<Rarity rarity={data.rarityType} plantID={data.plantID} />
 						<Element element={data.element} />
 					</div>
 					<div className="col-1 me-3 pe-4">
-						<button
+						{props.index >= 0 && <button
 							type="button"
 							className="btn-close btn-close-white"
 							aria-label="Close"
 							onClick={() => props.removeFunc(props.index)}
-						></button>
+						></button>}
 					</div>
 				</div>
 				<div className="col-12">
 					<Img id={data.id} imgType={data.img}></Img>
 				</div>
-				<div className="col-sm-4 col-md-8 col-lg-7 mt-auto">
+				<div className="col-sm-4 col-md-8 col-lg-12 mt-auto">
 					<p
 						className="text-center text-white mb-0 border border-white p-1"
 						style={{ fontSize: "11px", width: "60%" }}

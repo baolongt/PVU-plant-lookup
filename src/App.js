@@ -19,8 +19,8 @@ const App = () => {
 	}, []);
 
 	return (
-		<>
-			<div style={{ minHeight: "85vh" }}>
+		<div class="d-flex flex-column justify-content-between vh-100">
+			<div>
 				<Switch>
 					<Route exact path="/" component={Landing}></Route>
 					<Route path="/plant-lookup" component={PlantLookup}></Route>
@@ -35,7 +35,7 @@ const App = () => {
 					Chain)
 				</p>
 			</div>
-		</>
+		</div>
 	);
 };
 

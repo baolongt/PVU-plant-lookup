@@ -18,8 +18,8 @@ const Header = () => {
 const Card = ({ title, description, buttonName, color, link }) => {
 	return (
 		<div
-			className="card col-12 col-md-5 col-lg-4 mb-3 p-0 me-2"
-			style={{ minHeight: "240px" }}
+			className="card col-12 col-xl-5 mb-3 p-0 me-2"
+			style={{ minHeight: "240px", maxWidth: "500px" }}
 		>
 			<span
 				style={{ height: "60px" }}
@@ -38,7 +38,7 @@ const Card = ({ title, description, buttonName, color, link }) => {
 
 const Body = () => {
 	return (
-		<div className="row col-10 mx-auto d-flex justify-content-center mt-5">
+		<div className="row col-10 mx-auto d-flex flex-column align-items-center flex-xl-row justify-content-center mt-5">
 			<Card
 				title="Plant lookup"
 				description="Some quick example text to build on the card title and make up the

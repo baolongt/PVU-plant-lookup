@@ -90,9 +90,9 @@ const TotalBoard = (props) => {
 	return (
 		<div
 			style={{ minHeight: "100px" }}
-			className="col-12 ps-3 text-start flex-column d-flex text-light mt-3"
+			className="col-12 col-md-6 ps-3 text-start flex-column d-flex text-light mt-3 mx-auto"
 		>
-			<div className="col-12">
+			<div className="col-12 ms-2">
 				<p>
 					Total: {totalPlant - totalSapling - totalMama} NFT - {totalSapling}{" "}
 					sapling, {totalMama} mama ({totalPlant})
@@ -147,20 +147,20 @@ const TotalBoard = (props) => {
 						{toFixed(totlaLEPerHour, 2)}
 					</span>
 				</div>
-				<div className="d-flex col-12">
+				<div className="d-flex col-10">
 					LE per day:
 					<span className="ms-auto" style={{ color: "#20c997" }}>
 						{toFixed(totlaLEPerHour * 24, 2)}
 					</span>
 				</div>
-				<div className="d-flex col-12">
+				<div className="d-flex col-10">
 					LE to PVU per day (5% fee):
 					<span className="ms-auto" style={{ color: "#20c997" }}>
 						{toFixed(totlaPVUPerHour * 24, 2)} PVU
 					</span>
 				</div>
 				<div>
-					<div className="d-flex col-12">
+					<div className="d-flex col-10">
 						Total income:{" "}
 						<span className="ms-auto" style={{ color: "#20c997" }}>
 							{toFixed(totalPrice * 24, 2)}$
@@ -178,7 +178,9 @@ const TotalBoard = (props) => {
 					</div>
 				</div>
 			</div>
-			<div>Sorry for bad UI. Formula will update</div>
+			<div className="ms-2 mt-2">
+				<small>Sorry for bad UI. Formula will update</small>
+			</div>
 		</div>
 	);
 };

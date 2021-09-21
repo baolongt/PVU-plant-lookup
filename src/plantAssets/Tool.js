@@ -17,8 +17,8 @@ const Content = (props) => {
 const Tool = (props) => {
 	const [usedNum, setUsedNum] = useState(0);
 	return (
-		<div className="col-12 row mb-1">
-			<div className="col-2">
+		<div className="col-12 row mb-1 d-flex align-items-center">
+			<div className="col-3">
 				<img
 					className="h-auto w-100"
 					src={process.env.PUBLIC_URL + `/assets/tool/${props.name}.png`}
@@ -27,7 +27,7 @@ const Tool = (props) => {
 			</div>
 			{props.type == "input" ? (
 				<div className="col-8 d-flex ps-0">
-					<div className="col-3">
+					<div className="col-3 col-xl-4">
 						<input
 							type="number"
 							min="0"
@@ -39,7 +39,7 @@ const Tool = (props) => {
 							}}
 						/>
 					</div>
-					<div className="col-7">
+					<div className="col-9 col-xl-8">
 						<p
 							style={{ fontSize: "14px" }}
 							className="ms-1 mb-0 text-light pt-1"
@@ -50,7 +50,7 @@ const Tool = (props) => {
 				</div>
 			) : (
 				<button
-					className="col-5 btn btn-primary btn-sm"
+					className="col-5 btn btn-primary btn-sm" style={{ maxWidth: "80px"}}
 					onClick={() => {
 						setUsedNum(0);
 						setUsedNum(props.func());
