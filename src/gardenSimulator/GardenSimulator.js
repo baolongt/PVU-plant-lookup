@@ -97,7 +97,10 @@ const TeamCalculate = () => {
 						useGreenHouse={handleUseGreenHouse}
 					></Input>
 					<TotalBoard data={total} />
-					<button class="btn btn-danger col-6 mx-auto mt-2 ms-5">
+					<button
+						class="btn btn-danger col-6 mx-auto mt-2 ms-5"
+						onClick={handleClearAll}
+					>
 						Clear all
 					</button>
 				</div>

@@ -45,9 +45,10 @@ const toolPriceCalculate = ({
 };
 
 const TotalBoard = (props) => {
-	console.log(48, props.data);
 	const [price, setPrice] = useState(0);
 	const [udpateTime, setUdpateTime] = useState(0);
+	const [rate, setRate] = useState(0);
+	const [oldPrice, setOldPrice] = useState(0);
 	useEffect(() => {
 		const getAPI = async () => {
 			let res = await fetch(
@@ -85,7 +86,7 @@ const TotalBoard = (props) => {
 		greenHouseUsed
 	});
 	let netLEIncome = totlaLEPerHour * 24 - ToolSum;
-	let netIncome = netLEIncome / LEtoPVU;
+	let totalSpend = ToolSum + PotSum + totalSpendForSunflower;
 	return (
 		<div
 			style={{ minHeight: "100px" }}
@@ -98,8 +99,9 @@ const TotalBoard = (props) => {
 				</p>
 			</div>
 			<div className="col-12">
+				<p className="text-center h5">Spend</p>
 				<div className="d-flex col-12">
-					Total LE spend for sunflowers:
+					For sunflowers:
 					<span
 						className={`text-${
 							totalSpendForSunflower == 0 ? "light" : "danger"
@@ -109,19 +111,36 @@ const TotalBoard = (props) => {
 					</span>
 				</div>
 				<div className="d-flex col-12">
-					Total LE spend for pots:{" "}
+					For pots:{" "}
 					<span className={`text-${PotSum == 0 ? "light" : "danger"} ms-auto`}>
 						{PotSum}
 					</span>
 				</div>
 				<div className="d-flex col-12">
-					Total LE spend for other tools:{" "}
+					For other tools:{" "}
 					<span className={`text-${ToolSum == 0 ? "light" : "danger"} ms-auto`}>
 						{ToolSum}
 					</span>
 				</div>
+				<div className="d-flex col-12">
+					Total LE spend:{" "}
+					<span
+						className={`text-${totalSpend == 0 ? "light" : "danger"} ms-auto`}
+					>
+						{totalSpend}
+					</span>
+				</div>
+				<div className="d-flex col-12">
+					Total PVU spend:{" "}
+					<span
+						className={`text-${totalSpend == 0 ? "light" : "danger"} ms-auto`}
+					>
+						{totalSpend / 105}
+					</span>
+				</div>
 			</div>
 			<div className="col-12">
+				<p className="text-center h5">Income</p>
 				<div className="d-flex col-12">
 					LE per hour:
 					<span className="ms-auto" style={{ color: "#20c997" }}>
