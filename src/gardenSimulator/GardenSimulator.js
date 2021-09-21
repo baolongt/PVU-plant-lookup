@@ -88,7 +88,7 @@ const TeamCalculate = () => {
 		<>
 			<h2 className="text-light text-center">Garden simulator</h2>
 			<div className="row">
-				<div className="col-12 col-md-3 p-2 mt-5">
+				<div class="col-12 d-flex flex-column flex-md-row justify-content-between">
 					<Input
 						addPlantFunc={handleAddPlant}
 						waterAllPlant={handleWaterPlant}
@@ -97,14 +97,13 @@ const TeamCalculate = () => {
 						useGreenHouse={handleUseGreenHouse}
 					></Input>
 					<TotalBoard data={total} />
-					<button
-						class="btn btn-danger col-6 mx-auto mt-2 ms-5"
-						onClick={handleClearAll}
-					>
+				</div>
+				<div class="col-12 d-flex justify-content-center">
+					<button class="btn btn-danger mt-2" onClick={handleClearAll}>
 						Clear all
 					</button>
 				</div>
-				<div className="col-12 p-5">
+				<div className="col-12 col-md-9 p-5">
 					<div className="d-flex row" style={{ minHeight: "160px" }}>
 						{team.map((plant, index) => {
 							return isNaN(plant.plantID) ? (
@@ -142,7 +141,7 @@ const Input = (props) => {
 		props.addPlantFunc(IDCalculate(id));
 	};
 	return (
-		<div className="col-12 col-md-6 p-2">
+		<div className="col-12 p-2">
 			<div className="d-flex col-12 col-lg-8 mt-3 mx-auto">
 				<input
 					className="form-control"

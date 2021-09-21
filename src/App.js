@@ -35,6 +35,13 @@ const App = () => {
 					Chain)
 				</p>
 			</div>
+			<p className="d-none" align="left">
+				{" "}
+				<img
+					src="https://komarev.com/ghpvc/?username=baolongt&label=Profile%20views&color=0e75b6&style=flat"
+					alt="baolongt"
+				/>{" "}
+			</p>
 		</div>
 	);
 };
