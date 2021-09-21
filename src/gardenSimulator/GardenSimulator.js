@@ -7,18 +7,7 @@ import Plant from "../plantAssets/Plant";
 import TotalBoard from "./TotalBoard";
 import Tool from "../plantAssets/Tool";
 
-const calculateTotal = (team) => {
-	let total = {
-		totalSapling: 0,
-		totalMama: 0,
-		totlaLEPerHour: 0,
-		totalPlant: 0,
-		totalBigPotUsed: 0,
-		totalSmallPotUsed: 0,
-		totalWatered: 0,
-		scareCrowUsed: 0,
-		greenHouseUsed: 0
-	};
+const calculateTotal = ({ team, total }) => {
 	total.totalPlant = team.length;
 	total.totalSapling = team.filter((plant) => {
 		return plant.plantID === "sapling";
@@ -31,15 +20,21 @@ const calculateTotal = (team) => {
 	team.forEach((plant) => {
 		total.totlaLEPerHour += plant.LE / plant.hour;
 	});
-	return total;
+	return { ...total };
 };
 
 const TeamCalculate = () => {
 	const [team, setTeam] = useState([]);
 	const [total, setTotal] = useState({
+		totalSapling: 0,
+		totalMama: 0,
 		totlaLEPerHour: 0,
-		totlaLEPerDay: 0,
-		totalPlant: 0
+		totalPlant: 0,
+		totalBigPotUsed: 0,
+		totalSmallPotUsed: 0,
+		totalWatered: 0,
+		scareCrowUsed: 0,
+		greenHouseUsed: 0
 	});
 	useEffect(() => {
 		let team = JSON.parse(localStorage.getItem("team"));
@@ -50,7 +45,7 @@ const TeamCalculate = () => {
 		}
 	}, []);
 	useEffect(() => {
-		setTotal(calculateTotal(team));
+		setTotal(calculateTotal({ team, total }));
 	}, [team]);
 	const handleAddPlant = (plant) => {
 		if (plant) {
@@ -68,10 +63,8 @@ const TeamCalculate = () => {
 		setTeam(array);
 		localStorage.setItem("team", JSON.stringify([...array]));
 	};
-	const handleWaterPlant = () => {
-		let totalWatered = team.length;
-		setTotal({ ...total, totalWatered });
-		return { totalWatered };
+	const handleWaterPlant = (num) => {
+		setTotal({ ...total, totalWatered: num });
 	};
 	const handleUsePot = () => {
 		let totalBigPotUsed = team.filter((plant) => {
@@ -87,11 +80,15 @@ const TeamCalculate = () => {
 	const handleUseGreenHouse = (num) => {
 		setTotal({ ...total, greenHouseUsed: num });
 	};
+	const handleClearAll = () => {
+		setTeam([]);
+		localStorage.removeItem("team");
+	};
 	return (
 		<>
 			<h2 className="text-light text-center">Garden simulator</h2>
 			<div className="row">
-				<div className="col-3 p-2 mt-5">
+				<div className="col-12 col-md-3 p-2 mt-5">
 					<Input
 						addPlantFunc={handleAddPlant}
 						waterAllPlant={handleWaterPlant}
@@ -100,8 +97,11 @@ const TeamCalculate = () => {
 						useGreenHouse={handleUseGreenHouse}
 					></Input>
 					<TotalBoard data={total} />
+					<button class="btn btn-danger col-6 mx-auto mt-2 ms-5">
+						Clear all
+					</button>
 				</div>
-				<div className="col-9 p-5">
+				<div className="col-12 col-md-9 p-5">
 					<div className="d-flex row" style={{ minHeight: "160px" }}>
 						{team.map((plant, index) => {
 							return isNaN(plant.plantID) ? (
@@ -170,13 +170,15 @@ const Input = (props) => {
 				</button>
 			</div>
 			<div className="d-flex col-12 mt-2 flex-column">
+				<p className="text-center text-light">Tool assets</p>
 				<Tool
 					toolID="2"
 					name="water"
-					text="Water all plant"
+					text="Water (50LE)"
+					type="input"
 					func={props.waterAllPlant}
 				/>
-				<Tool toolID="4" name="bigpot" text="Use pot" func={props.usePot} />
+				<Tool toolID="4" name="bigpot" text="Buy pot" func={props.usePot} />
 				<div
 					className="text-center text-light mb-1"
 					style={{ fontSize: "14px" }}
@@ -186,14 +188,14 @@ const Input = (props) => {
 				<Tool
 					toolID="1"
 					name="scarecrow"
-					text="Scare crow used"
+					text="Scare crow (20LE)"
 					type="input"
 					func={props.useScareCrow}
 				/>
 				<Tool
 					toolID="5"
 					name="greenhouse"
-					text="Green house used"
+					text="Green house (10LE)"
 					type="input"
 					func={props.useGreenHouse}
 				/>

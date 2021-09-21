@@ -2,16 +2,14 @@
 import { useState } from "react";
 
 const Content = (props) => {
-	let { totalBigPotUsed, totalSmallPotUsed, totalWatered } = props.data;
+	let { totalBigPotUsed, totalSmallPotUsed } = props.data;
 	let text = "";
-	if (totalWatered) {
-		text = `Watered plant: ${totalWatered}`;
-	} else if (totalBigPotUsed && totalSmallPotUsed !== 0) {
-		text += `Used ${totalBigPotUsed} big pot and ${totalSmallPotUsed} small pot`;
+	if (totalBigPotUsed && totalSmallPotUsed !== 0) {
+		text += `Bought ${totalBigPotUsed} big pot and ${totalSmallPotUsed} small pot`;
 	} else if (totalBigPotUsed) {
-		text += `Used ${totalBigPotUsed} big pot`;
+		text += `Bought ${totalBigPotUsed} big pot`;
 	} else if (totalSmallPotUsed !== 0 && totalSmallPotUsed) {
-		text += `Used ${totalSmallPotUsed} small pot`;
+		text += `Bought ${totalSmallPotUsed} small pot`;
 	}
 	return <p className="text-danger mb-0 pt-1">{text}</p>;
 };
@@ -31,6 +29,8 @@ const Tool = (props) => {
 				<div className="col-8 d-flex ps-0">
 					<div className="col-3">
 						<input
+							type="number"
+							min="0"
 							value={usedNum}
 							className="form-control form-control-sm"
 							onChange={(e) => {
@@ -50,15 +50,16 @@ const Tool = (props) => {
 				</div>
 			) : (
 				<button
-					className="col-4 btn btn-primary btn-sm"
+					className="col-5 btn btn-primary btn-sm"
 					onClick={() => {
+						setUsedNum(0);
 						setUsedNum(props.func());
 					}}
 				>
 					{props.text}
 				</button>
 			)}
-			<div className="col-12 text-start">
+			<div className="col-12 ps-4">
 				{usedNum ? <Content data={usedNum} /> : ""}
 			</div>
 		</div>

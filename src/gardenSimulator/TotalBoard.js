@@ -15,26 +15,37 @@ const toolPriceCalculate = ({
 	scareCrowUsed,
 	greenHouseUsed
 }) => {
-	let sum = 0;
+	let ToolSum = 0;
+	let PotSum = 0;
 	ToolsList.forEach((tool, index) => {
-		let rate = tool.price / tool.quantity;
+		let price = tool.price;
 		// eslint-disable-next-line default-case
 		switch (index) {
 			case 0:
-				sum += scareCrowUsed * rate;
+				ToolSum += scareCrowUsed * price;
 				break;
 			case 1:
-				sum += totalWatered * rate;
+				ToolSum += totalWatered * price;
 				break;
 			case 4:
-				sum += greenHouseUsed * rate;
+				ToolSum += greenHouseUsed * price;
+				break;
+			case 3:
+				PotSum += totalSmallPotUsed * price;
+				break;
+			case 2:
+				PotSum += totalBigPotUsed * price;
 				break;
 		}
 	});
-	return sum;
+	return {
+		PotSum,
+		ToolSum
+	};
 };
 
 const TotalBoard = (props) => {
+	console.log(48, props.data);
 	const [price, setPrice] = useState(0);
 	const [udpateTime, setUdpateTime] = useState(0);
 	useEffect(() => {
@@ -62,18 +73,18 @@ const TotalBoard = (props) => {
 	} = props.data;
 	let tax = 95 / 100;
 	let LEtoPVU = 150;
-	totlaLEPerHour = totlaLEPerHour * tax;
+	totlaLEPerHour = totlaLEPerHour;
 	let totlaPVUPerHour = totlaLEPerHour / LEtoPVU;
 	let totalPrice = totlaPVUPerHour * price;
 	let totalSpendForSunflower = totalSapling * 100 + totalMama * 200;
-	let totalSpendForTool = toolPriceCalculate({
+	let { PotSum, ToolSum } = toolPriceCalculate({
 		totalBigPotUsed,
 		totalSmallPotUsed,
 		totalWatered,
 		scareCrowUsed,
 		greenHouseUsed
 	});
-	let netLEIncome = totlaLEPerHour * 24 - totalSpendForTool;
+	let netLEIncome = totlaLEPerHour * 24 - ToolSum;
 	let netIncome = netLEIncome / LEtoPVU;
 	return (
 		<div
@@ -81,8 +92,14 @@ const TotalBoard = (props) => {
 			className="col-12 ps-3 text-start flex-column d-flex text-light mt-3"
 		>
 			<div className="col-12">
-				<div>
-					Total LE spend for sunflowers:{" "}
+				<p>
+					Total: {totalPlant - totalSapling - totalMama} NFT - {totalSapling}{" "}
+					sapling, {totalMama} mama ({totalPlant})
+				</p>
+			</div>
+			<div className="col-12">
+				<div className="d-flex col-12">
+					Total LE spend for sunflowers:
 					<span
 						className={`text-${
 							totalSpendForSunflower == 0 ? "light" : "danger"
@@ -91,56 +108,56 @@ const TotalBoard = (props) => {
 						{totalSpendForSunflower}
 					</span>
 				</div>
-				<div>
-					Total LE spend for tools (not inclued pot):{" "}
-					<span
-						className={`text-${
-							totalSpendForTool == 0 ? "light" : "danger"
-						} ms-auto`}
-					>
-						{totalSpendForTool}
+				<div className="d-flex col-12">
+					Total LE spend for pots:{" "}
+					<span className={`text-${PotSum == 0 ? "light" : "danger"} ms-auto`}>
+						{PotSum}
+					</span>
+				</div>
+				<div className="d-flex col-12">
+					Total LE spend for other tools:{" "}
+					<span className={`text-${ToolSum == 0 ? "light" : "danger"} ms-auto`}>
+						{ToolSum}
 					</span>
 				</div>
 			</div>
 			<div className="col-12">
-				<div>
+				<div className="d-flex col-12">
 					LE per hour:
-					<span> {toFixed(totlaLEPerHour, 2)}</span> -{" "}
-					<span style={{ color: "#20c997" }}>
-						{toFixed(totlaPVUPerHour, 2)} PVU{" "}
-					</span>{" "}
-					~<span style={{ color: "#20c997" }}>{toFixed(totalPrice, 2)}$</span>
+					<span className="ms-auto" style={{ color: "#20c997" }}>
+						{toFixed(totlaLEPerHour, 2)}
+					</span>
 				</div>
-				<div>
+				<div className="d-flex col-12">
 					LE per day:
-					<span> {toFixed(totlaLEPerHour * 24, 2)}</span> -{" "}
-					<span style={{ color: "#20c997" }}>
+					<span className="ms-auto" style={{ color: "#20c997" }}>
+						{toFixed(totlaLEPerHour * 24, 2)}
+					</span>
+				</div>
+				<div className="d-flex col-12">
+					LE to PVU per day (5% fee):
+					<span className="ms-auto" style={{ color: "#20c997" }}>
 						{toFixed(totlaPVUPerHour * 24, 2)} PVU
-					</span>{" "}
-					~
-					<span style={{ color: "#20c997" }}>
-						{toFixed(totalPrice * 24, 2)}$
 					</span>
 				</div>
 				<div>
-					Net LE:
-					<span> {toFixed(netLEIncome, 2)}</span> -{" "}
-					<span style={{ color: "#20c997" }}>{toFixed(netIncome, 2)} PVU</span>{" "}
-					~
-					<span style={{ color: "#20c997" }}>
-						{toFixed(netIncome * price, 2)}$
-					</span>
+					<div className="d-flex col-12">
+						Total income:{" "}
+						<span className="ms-auto" style={{ color: "#20c997" }}>
+							{toFixed(totalPrice * 24, 2)}$
+						</span>
+					</div>
+					<div className="text-warning">
+						Income not inclued sunflowers and tools
+					</div>
+					<div>
+						1 PVU ={" "}
+						<span className="ms-auto" style={{ color: "#20c997" }}>
+							{price}$
+						</span>{" "}
+						updated {udpateTime}
+					</div>
 				</div>
-			</div>
-			<p className="fw-normal text-center mb-0">(included tax 5%)</p>
-			<div className="col-12">
-				<p>
-					Total: {totalPlant - totalSapling - totalMama} NFT - {totalSapling}{" "}
-					sapling, {totalMama} mama ({totalPlant})
-				</p>
-				<p>
-					PVU = {price}$ updated {udpateTime}
-				</p>
 			</div>
 			<div>Sorry for bad UI. Formula will update</div>
 		</div>
